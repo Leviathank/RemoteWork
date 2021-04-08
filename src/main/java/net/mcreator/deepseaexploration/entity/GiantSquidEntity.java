@@ -27,16 +27,12 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.data.Main;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -92,7 +88,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 			};
 		});
 	}
-	public static class CustomEntity extends CreatureEntity {
+	public static class CustomEntity extends SquidEntity {
 		public CustomEntity(FMLPlayMessages.SpawnEntity packet, World world) {
 			this(entity, world);
 		}
@@ -100,7 +96,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 		public CustomEntity(EntityType<CustomEntity> type, World world) {
 			super(type, world);
 			experienceValue = 8;
-			setNoAI(false);
+			setNoAI(true);
 			this.moveController = new MovementController(this) {
 				@Override
 				public void tick() {
@@ -128,14 +124,6 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 		@Override
 		public IPacket<?> createSpawnPacket() {
 			return NetworkHooks.getEntitySpawningPacket(this);
-		}
-
-		@Override
-		protected void registerGoals() {
-			super.registerGoals();
-			this.goalSelector.addGoal(1, new PanicGoal(this, 1.2));
-			this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
-			this.goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1, 40));
 		}
 
 		@Override
