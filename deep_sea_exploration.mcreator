@@ -1,0 +1,39 @@
+{
+  "id_map": {},
+  "mod_elements": [
+    {
+      "name": "GiantSquid",
+      "type": "mob",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "giant_squid"
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "language_map": {
+    "en_us": {
+      "entity.deep_sea_exploration.giant_squid": "Giant Squid",
+      "item.deep_sea_exploration.giant_squid_spawn_egg": "Giant Squid Spawn Egg"
+    }
+  },
+  "workspaceSettings": {
+    "modid": "deep_sea_exploration",
+    "modName": "Deep Sea exploration",
+    "version": "1.0.0",
+    "author": "lmman, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.15.2",
+    "modElementsPackage": "net.mcreator.deepseaexploration",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202000547520
+}
