@@ -31,6 +31,7 @@ import net.minecraft.item.Item;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.EntityType;
@@ -134,8 +135,10 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 		@Override
 		protected void registerGoals() {
 			super.registerGoals();
-			this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1, 40));
-			this.goalSelector.addGoal(2, new PanicGoal(this, 1.2));
+			this.goalSelector.addGoal(1, new PanicGoal(this, 1.2));
+			this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1, 40));
+			this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
+			this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1, 40));
 		}
 
 		@Override
