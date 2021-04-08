@@ -60,7 +60,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 	public void initElements() {
 		entity = (EntityType.Builder.<CustomEntity>create(CustomEntity::new, EntityClassification.WATER_CREATURE)
 				.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new)
-				.size(1.5f, 0.3f)).build("giant_squid").setRegistryName("giant_squid");
+				.size(2.3000000000000003f, 1f)).build("giant_squid").setRegistryName("giant_squid");
 		elements.entities.add(() -> entity);
 		elements.items.add(
 				() -> new SpawnEggItem(entity, -3407872, -205, new Item.Properties().group(ItemGroup.MISC)).setRegistryName("giant_squid_spawn_egg"));
@@ -87,7 +87,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 			return new MobRenderer(renderManager, new ModelCollosalSquid(), 1f) {
 				@Override
 				public ResourceLocation getEntityTexture(Entity entity) {
-					return new ResourceLocation("deep_sea_exploration:textures/giant_squid.png");
+					return new ResourceLocation("deep_sea_exploration:textures/collosal_squid.png");
 				}
 			};
 		});
