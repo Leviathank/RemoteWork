@@ -24,8 +24,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.network.IPacket;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.entity.passive.SquidEntity;
@@ -76,7 +74,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 				biomeCriteria = true;
 			if (!biomeCriteria)
 				continue;
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(entity, 6, 1, 2));
+			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(entity, 6, 1, 4));
 		}
 		EntitySpawnPlacementRegistry.register(entity, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
 				SquidEntity::func_223365_b);
@@ -86,7 +84,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 	@OnlyIn(Dist.CLIENT)
 	public void registerModels(ModelRegistryEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
-			return new MobRenderer(renderManager, new ModelGiant_Squid(), 1f) {
+			return new MobRenderer(renderManager, new ModelCollosalSquid(), 1f) {
 				@Override
 				public ResourceLocation getEntityTexture(Entity entity) {
 					return new ResourceLocation("deep_sea_exploration:textures/giant_squid.png");
@@ -136,19 +134,13 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 		protected void registerGoals() {
 			super.registerGoals();
 			this.goalSelector.addGoal(1, new PanicGoal(this, 1.2));
-			this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1, 40));
-			this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
-			this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1, 40));
+			this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
+			this.goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1, 40));
 		}
 
 		@Override
 		public CreatureAttribute getCreatureAttribute() {
 			return CreatureAttribute.WATER;
-		}
-
-		protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
-			super.dropSpecialItems(source, looting, recentlyHitIn);
-			this.entityDropItem(new ItemStack(Items.INK_SAC, (int) (1)));
 		}
 
 		@Override
@@ -177,9 +169,9 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 		protected void registerAttributes() {
 			super.registerAttributes();
 			if (this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED) != null)
-				this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3);
+				this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2);
 			if (this.getAttribute(SharedMonsterAttributes.MAX_HEALTH) != null)
-				this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30);
+				this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
 			if (this.getAttribute(SharedMonsterAttributes.ARMOR) != null)
 				this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0);
 			if (this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null)
@@ -206,44 +198,80 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 	// Made with Blockbench 3.8.3
 	// Exported for Minecraft version 1.15 - 1.16
 	// Paste this class into your mod and generate all required imports
-	public static class ModelGiant_Squid extends EntityModel<Entity> {
+	public static class ModelCollosalSquid extends EntityModel<Entity> {
 		private final ModelRenderer Main;
-		private final ModelRenderer Head;
-		private final ModelRenderer st3;
-		private final ModelRenderer st2;
-		private final ModelRenderer st1;
-		private final ModelRenderer lt1;
-		private final ModelRenderer lt2;
-		public ModelGiant_Squid() {
-			textureWidth = 256;
-			textureHeight = 256;
+		private final ModelRenderer s;
+		private final ModelRenderer s2;
+		private final ModelRenderer s3;
+		private final ModelRenderer s4;
+		private final ModelRenderer s5;
+		private final ModelRenderer s6;
+		private final ModelRenderer s7;
+		private final ModelRenderer s8;
+		private final ModelRenderer s9;
+		private final ModelRenderer s10;
+		private final ModelRenderer lr;
+		private final ModelRenderer ll;
+		private final ModelRenderer top;
+		public ModelCollosalSquid() {
+			textureWidth = 512;
+			textureHeight = 512;
 			Main = new ModelRenderer(this);
 			Main.setRotationPoint(0.0F, 24.0F, -1.0F);
-			Head = new ModelRenderer(this);
-			Head.setRotationPoint(0.0F, 0.0F, 4.0F);
-			Main.addChild(Head);
-			Head.setTextureOffset(74, 74).addBox(-2.0F, -3.0F, -27.0F, 5.0F, 3.0F, 34.0F, 0.0F, false);
-			Head.setTextureOffset(15, 0).addBox(-5.0F, -1.0F, -26.0F, 11.0F, 0.0F, 13.0F, 0.0F, false);
-			st3 = new ModelRenderer(this);
-			st3.setRotationPoint(3.0F, 0.0F, 11.0F);
-			Main.addChild(st3);
-			st3.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, 0.0F, 1.0F, 1.0F, 26.0F, 0.0F, false);
-			st2 = new ModelRenderer(this);
-			st2.setRotationPoint(0.0F, 0.0F, 11.0F);
-			Main.addChild(st2);
-			st2.setTextureOffset(0, 27).addBox(0.0F, -1.0F, 0.0F, 1.0F, 1.0F, 26.0F, 0.0F, false);
-			st1 = new ModelRenderer(this);
-			st1.setRotationPoint(-2.0F, 0.0F, 11.0F);
-			Main.addChild(st1);
-			st1.setTextureOffset(0, 73).addBox(0.0F, -1.0F, 0.0F, 1.0F, 1.0F, 26.0F, 0.0F, false);
-			lt1 = new ModelRenderer(this);
-			lt1.setRotationPoint(3.0F, -3.0F, 11.0F);
-			Main.addChild(lt1);
-			lt1.setTextureOffset(0, 73).addBox(-1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 72.0F, 0.0F, false);
-			lt2 = new ModelRenderer(this);
-			lt2.setRotationPoint(-2.0F, -3.0F, 11.0F);
-			Main.addChild(lt2);
-			lt2.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 72.0F, 0.0F, false);
+			s = new ModelRenderer(this);
+			s.setRotationPoint(6.0F, -16.0F, 25.0F);
+			Main.addChild(s);
+			s.setTextureOffset(195, 76).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s2 = new ModelRenderer(this);
+			s2.setRotationPoint(7.0F, -7.0F, 25.0F);
+			Main.addChild(s2);
+			s2.setTextureOffset(155, 191).addBox(-2.0F, -1.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s3 = new ModelRenderer(this);
+			s3.setRotationPoint(7.0F, -3.0F, 25.0F);
+			Main.addChild(s3);
+			s3.setTextureOffset(148, 146).addBox(-2.0F, -1.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s4 = new ModelRenderer(this);
+			s4.setRotationPoint(2.0F, -2.0F, 25.0F);
+			Main.addChild(s4);
+			s4.setTextureOffset(148, 101).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s5 = new ModelRenderer(this);
+			s5.setRotationPoint(-2.0F, -2.0F, 25.0F);
+			Main.addChild(s5);
+			s5.setTextureOffset(101, 144).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s6 = new ModelRenderer(this);
+			s6.setRotationPoint(-7.0F, -3.0F, 25.0F);
+			Main.addChild(s6);
+			s6.setTextureOffset(0, 144).addBox(0.0F, -1.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s7 = new ModelRenderer(this);
+			s7.setRotationPoint(-7.0F, -7.0F, 25.0F);
+			Main.addChild(s7);
+			s7.setTextureOffset(101, 99).addBox(0.0F, -1.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s8 = new ModelRenderer(this);
+			s8.setRotationPoint(-6.0F, -16.0F, 25.0F);
+			Main.addChild(s8);
+			s8.setTextureOffset(0, 99).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s9 = new ModelRenderer(this);
+			s9.setRotationPoint(-2.0F, -16.0F, 25.0F);
+			Main.addChild(s9);
+			s9.setTextureOffset(0, 45).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			s10 = new ModelRenderer(this);
+			s10.setRotationPoint(2.0F, -16.0F, 25.0F);
+			Main.addChild(s10);
+			s10.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 43.0F, 0.0F, false);
+			lr = new ModelRenderer(this);
+			lr.setRotationPoint(-7.0F, -11.0F, 25.0F);
+			Main.addChild(lr);
+			lr.setTextureOffset(0, 0).addBox(0.0F, -1.0F, 0.0F, 2.0F, 2.0F, 97.0F, 0.0F, false);
+			ll = new ModelRenderer(this);
+			ll.setRotationPoint(7.0F, -11.0F, 25.0F);
+			Main.addChild(ll);
+			ll.setTextureOffset(0, 99).addBox(-2.0F, -1.0F, 0.0F, 2.0F, 2.0F, 97.0F, 0.0F, false);
+			top = new ModelRenderer(this);
+			top.setRotationPoint(6.0F, -16.0F, 25.0F);
+			Main.addChild(top);
+			top.setTextureOffset(101, 0).addBox(-20.0F, -2.0F, -48.0F, 28.0F, 18.0F, 34.0F, 0.0F, false);
+			top.setTextureOffset(101, 52).addBox(-31.0F, 7.0F, -57.0F, 49.0F, 1.0F, 23.0F, 0.0F, false);
+			top.setTextureOffset(191, 0).addBox(-13.0F, 0.0F, -14.0F, 14.0F, 14.0F, 14.0F, 0.0F, false);
 		}
 
 		@Override

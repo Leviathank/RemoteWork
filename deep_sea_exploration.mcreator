@@ -15,8 +15,8 @@
   "sound_elements": [],
   "language_map": {
     "en_us": {
-      "entity.deep_sea_exploration.giant_squid": "Giant Squid",
-      "item.deep_sea_exploration.giant_squid_spawn_egg": "Giant Squid Spawn Egg"
+      "entity.deep_sea_exploration.giant_squid": "Colossal Squid",
+      "item.deep_sea_exploration.giant_squid_spawn_egg": "Colossal Squid Spawn Egg"
     }
   },
   "workspaceSettings": {
