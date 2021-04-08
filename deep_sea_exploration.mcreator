@@ -9,6 +9,15 @@
       "locked_code": false,
       "ids": {},
       "registry_name": "giant_squid"
+    },
+    {
+      "name": "ColossalSquidAnim",
+      "type": "procedure",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "colossal_squid_anim"
     }
   ],
   "variable_elements": [],
