@@ -2,7 +2,7 @@
 // Exported for Minecraft version 1.15 - 1.16
 // Paste this class into your mod and generate all required imports
 
-public static class ModelCollosalSquid extends EntityModel<Entity> {
+public static class Modelcolossal_squid extends EntityModel<Entity> {
 	private final ModelRenderer Main;
 	private final ModelRenderer s;
 	private final ModelRenderer s2;
@@ -18,9 +18,9 @@ public static class ModelCollosalSquid extends EntityModel<Entity> {
 	private final ModelRenderer ll;
 	private final ModelRenderer top;
 
-	public ModelCollosalSquid() {
-		textureWidth = 512;
-		textureHeight = 512;
+	public Modelcolossal_squid() {
+		textureWidth = 16;
+		textureHeight = 16;
 
 		Main = new ModelRenderer(this);
 		Main.setRotationPoint(0.0F, 24.0F, -1.0F);

@@ -18,4 +18,9 @@ authors="lmman, MCreator"
 
 
 
+[[dependencies.deep_sea_exploration]]
+    modId="geckolib"
+    mandatory=false
+    ordering="NONE"
+    side="BOTH"
 

@@ -4,8 +4,8 @@
   "definition": {
     "mobName": "Colossal Squid",
     "mobLabel": "",
-    "mobModelName": "ModelCollosalSquid",
-    "mobModelTexture": "collosal_squid.png",
+    "mobModelName": "Modelcolossal_squid",
+    "mobModelTexture": "colossal_squid.png",
     "mobModelGlowTexture": "",
     "modelWidth": 2.3000000000000003,
     "modelHeight": 1.0,

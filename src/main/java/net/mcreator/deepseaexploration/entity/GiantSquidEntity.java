@@ -1,6 +1,11 @@
 
 package net.mcreator.deepseaexploration.entity;
 
+import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib.event.AnimationTestEvent;
+import software.bernie.geckolib.entity.IAnimatedEntity;
+import software.bernie.geckolib.animation.controller.EntityAnimationController;
+
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.FMLPlayMessages;
@@ -86,15 +91,28 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 	@OnlyIn(Dist.CLIENT)
 	public void registerModels(ModelRegistryEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(entity, renderManager -> {
-			return new MobRenderer(renderManager, new ModelCollosalSquid(), 1f) {
+			return new MobRenderer(renderManager, new Modelcolossal_squid(), 1f) {
 				@Override
 				public ResourceLocation getEntityTexture(Entity entity) {
-					return new ResourceLocation("deep_sea_exploration:textures/collosal_squid.png");
+					return new ResourceLocation("deep_sea_exploration:textures/colossal_squid.png");
 				}
 			};
 		});
 	}
-	public static class CustomEntity extends CreatureEntity {
+	public static class CustomEntity extends CreatureEntity implements IAnimatedEntity {
+		EntityAnimationManager manager = new EntityAnimationManager();
+		EntityAnimationController controller = new EntityAnimationController(this, "controller", 1, this::animationPredicate);
+		private <E extends Entity> boolean animationPredicate(AnimationTestEvent<E> event) {
+			controller.transitionLengthTicks = 1;
+			controller.markNeedsReload();
+			return true;
+		}
+
+		@Override
+		public EntityAnimationManager getAnimationManager() {
+			return manager;
+		}
+
 		public CustomEntity(FMLPlayMessages.SpawnEntity packet, World world) {
 			this(entity, world);
 		}
@@ -103,6 +121,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 			super(type, world);
 			experienceValue = 8;
 			setNoAI(false);
+			manager.addAnimationController(controller);
 			this.moveController = new MovementController(this) {
 				@Override
 				public void tick() {
@@ -205,7 +224,7 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 	// Made with Blockbench 3.8.3
 	// Exported for Minecraft version 1.15 - 1.16
 	// Paste this class into your mod and generate all required imports
-	public static class ModelCollosalSquid extends EntityModel<Entity> {
+	public static class Modelcolossal_squid extends EntityModel<Entity> {
 		private final ModelRenderer Main;
 		private final ModelRenderer s;
 		private final ModelRenderer s2;
@@ -220,9 +239,9 @@ public class GiantSquidEntity extends DeepSeaExplorationModElements.ModElement {
 		private final ModelRenderer lr;
 		private final ModelRenderer ll;
 		private final ModelRenderer top;
-		public ModelCollosalSquid() {
-			textureWidth = 512;
-			textureHeight = 512;
+		public Modelcolossal_squid() {
+			textureWidth = 16;
+			textureHeight = 16;
 			Main = new ModelRenderer(this);
 			Main.setRotationPoint(0.0F, 24.0F, -1.0F);
 			s = new ModelRenderer(this);
